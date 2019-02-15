@@ -100,13 +100,16 @@ class DOMNodeCollection {
 
     on(string, callback) {
         this.arr.forEach((el) => {
-            debugger
-            el.setAttribute(`${string} callback`, callback);
+            el[string] = callback
             el.addEventListener(string, callback);
         })
     }
 
     off(string) {
+        this.arr.forEach((el) => {
+            el.removeEventListener(string, el[string]);
+            el[string] = '';
+        })
 
     }
 
